@@ -441,7 +441,6 @@ RegisterNUICallback('notifyOil', function(data, cb)
 end)
 
 RegisterNUICallback('close', function(data, cb)
-	print('recebido fechar')
 	closeUI()
 end)
 
@@ -460,13 +459,11 @@ RegisterNetEvent('vrp_advanced_vehicles:useTheJackFunction')
 AddEventHandler('vrp_advanced_vehicles:useTheJackFunction', function(data,firstStep)
 	if firstStep and Config.UseT1gerMechanic then
 		closeUI()
-		print(data.idname)-- oil brake_pads
 		local ped = PlayerPedId()
 		local veh = GetVehiclePedIsIn(ped)
 		local vehCoords = {}
 		while veh ~= 0 do
 			vehCoords = GetEntityCoords(veh)
-			print('aqui')
 			DrawText3Ds(vehCoords.x, vehCoords.y, vehCoords.z + 0.6, Lang[Config.lang]['out_vehicle'])
 			
 			veh = GetVehiclePedIsIn(ped)
@@ -475,7 +472,6 @@ AddEventHandler('vrp_advanced_vehicles:useTheJackFunction', function(data,firstS
 		local distance = #(GetEntityCoords(ped) - vector3(vehCoords.x, vehCoords.y, vehCoords.z))
 		while veh == 0 and distance < 3.0 do
 			local vehCoords = GetEntityCoords(vehicleDataAction.veh)
-			print('aquip')
 			DrawText3Ds(vehCoords.x, vehCoords.y, vehCoords.z + 0.6, Lang[Config.lang]['start_cancel'])
 			if IsControlJustPressed(0, 38) then
 				local done = UseTheJackFunction(vehicleDataAction.veh,firstStep)
@@ -1003,7 +999,6 @@ end
 
 function DrawText3Ds(x,y,z,text)
 	local onScreen,_x,_y = World3dToScreen2d(x,y,z)
-	print(text)
 	SetTextFont(4)
 	SetTextScale(0.35,0.35)
 	SetTextColour(255,255,255,150)
